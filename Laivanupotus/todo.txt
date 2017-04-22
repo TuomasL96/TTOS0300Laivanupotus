@@ -1,0 +1,30 @@
+Release notes:
+- re: bonus points: as it was taking me quite a lot of time anyway I have not bothered with any unit tests, the AI is just random (other than avoiding places it has already tried before), and there are no game modes or manual placing of ships
+- FWIW the source is in a git repository.
+- I added the extra rule that you can tell if a ship has been sunk or is merely damaged. I also added an "Automated Game" option in the menu to make two computer players play each other
+
+Sites code is vaguely based on:
+"WPF Apps With The Model-View-ViewModel Design Pattern" http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
+"John Conway's Game of Life in XAML/WPF using embedded Python" http://www.thinkbottomup.com.au/site/blog/Game_of_Life_in_XAML_WPF_using_embedded_Python
+
+Not going to bother with:
+- animation for when you or computer fire a shot into water
+- AI that realised things like e.g. note a sunk Battleship must be surrounded by water, a ship square without a non-ship square showing the end needs some shots (until it has been sunk), or other stuff
+- unit tests
+- Optionally make computer attack pattern random (options items in menu, or just a tick box in menu)
+- less space between cells
+- A game mode where each player gets 3 attacks before their opponent has to announce which ones hit.
+- human choosing ship placement
+- is EventSetter for left button down in the right place?
+- could use itemscontrol rather than listbox?
+- maybe rather than using PreviewMouseLeftButtonDown to collect clicks on grid, should use mousrleft down and HandledEventsToo (web says do in code behind, but looks like xaml also has the property), or otherwise remove the standard handler
+- maybe rather than deciding what happens on button click using binding, have subclasses of View/SeaGrid
+- things from bonus points
+- about box, help
+- when someone sinks a ship, show a popup box
+- ship placement needs a few more rules (at least one square of freedom around a ship)
+- selection items have grey background whilst selected yet unfocused
+- fix the disconnecteditem bug (or determine if it is a bug in WPF), maybe this is relevant: http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/36aec363-9e33-45bd-81f0-1325a735cc45/#611fccf2-737f-4309-a793-4001488b23aa
+- use functional list All/Map for ship placement - though slicing and mapping multi dimensional lists is awkward enough even in Python etc, let alone C#
+- maybe ObservableSquare should be in ViewModel and two dimensional lists of SeaSquare should be converted to 2d observableseasquare lists in viewmodel, as otherwise model code is somewhat contaminated with view-type stuff, but then you have to add a load of code to keep observable seasquare in sync with seasquare, plus being observable is not necessarily inherently bad for model code?
+
