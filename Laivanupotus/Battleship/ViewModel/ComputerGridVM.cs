@@ -51,7 +51,7 @@ namespace Battleship.ViewModel
                 computerPlayer.TakeTurn(humanPlayer);
                 if (humanPlayer.GameEnd())
                 {
-                    MessageBox.Show("Your fleet got sunk, better luck next time");
+                    MessageBox.Show("Your lost the game!");
                     return true;
                 }
             }

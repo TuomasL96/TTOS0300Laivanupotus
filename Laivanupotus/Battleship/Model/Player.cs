@@ -55,15 +55,15 @@ namespace Battleship.Model
 
             myShips.ForEach(s => s.Repair());
             enemyShips.ForEach(s => s.Repair());
-            placeShips();
+            PlaceShips();
         }
         // Tästä alkaa laivojen random sijoittelujutut
-        private bool squareFree(int row, int col)
+        private bool SquareFree(int row, int col)
         {
             return (MyGrid[row][col].ShipIndex == -1) ? true : false;
         }
 
-        private bool placeVertical(int shipIndex, int remainingLength)
+        private bool PlaceVertical(int shipIndex, int remainingLength)
         {
             int startPosRow = rnd.Next(GRID_SIZE - remainingLength);
             int startPosCol = rnd.Next(GRID_SIZE);
@@ -73,7 +73,7 @@ namespace Battleship.Model
                 int tmp = remainingLength;
                 for (int row = startPosRow; tmp != 0; ++row)
                 {
-                    if (!squareFree(row, startPosCol))
+                    if (!SquareFree(row, startPosCol))
                         return false;
                     --tmp;
                 }
@@ -94,7 +94,7 @@ namespace Battleship.Model
             return false;
         }
 
-        private bool placeHorizontal(int shipIndex, int remainingLength)
+        private bool PlaceHorizontal(int shipIndex, int remainingLength)
         {
             int startPosRow = rnd.Next(GRID_SIZE);
             int startPosCol = rnd.Next(GRID_SIZE - remainingLength);
@@ -104,7 +104,7 @@ namespace Battleship.Model
                 int tmp = remainingLength;
                 for (int col = startPosCol; tmp != 0; ++col)
                 {
-                    if (!squareFree(startPosRow, col))
+                    if (!SquareFree(startPosRow, col))
                         return false;
                     --tmp;
                 }
@@ -125,7 +125,7 @@ namespace Battleship.Model
             return false;
         }
 
-        private void placeShips()
+        private void PlaceShips()
         {
             bool startAgain = false;
 
@@ -140,9 +140,9 @@ namespace Battleship.Model
                     int remainingLength = myShips[i].Length;
 
                     if (vertical)
-                        placed = placeVertical(i, remainingLength);
+                        placed = PlaceVertical(i, remainingLength);
                     else
-                        placed = placeHorizontal(i, remainingLength);
+                        placed = PlaceHorizontal(i, remainingLength);
                 }
 
                 if (loopCounter == 10000)
@@ -150,10 +150,10 @@ namespace Battleship.Model
             }
 
             if (startAgain)
-                placeShips();
+                PlaceShips();
         }
-// pelin muu toiminta
-        private void sinkShip(int i, List<List<SeaSquare>> grid)
+        // pelin muu toiminta
+        private void SinkShip(int i, List<List<SeaSquare>> grid)
         {
             foreach (var row in grid)
             {
@@ -167,12 +167,12 @@ namespace Battleship.Model
 
         private void MineSunk(int i)
         {
-            sinkShip(i, MyGrid);
+            SinkShip(i, MyGrid);
         }
 
         public void EnemySunk(int i)
         {
-            sinkShip(i, EnemyGrid);
+            SinkShip(i, EnemyGrid);
         }
 
 
