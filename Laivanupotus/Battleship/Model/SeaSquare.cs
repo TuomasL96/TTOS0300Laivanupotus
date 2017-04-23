@@ -19,8 +19,8 @@ namespace Battleship.Model
             get { return (SquareType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
-        public static readonly DependencyProperty TypeProperty =
-        DependencyProperty.Register("Type", typeof(SquareType), typeof(SeaSquare));
+
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(SquareType), typeof(SeaSquare));
 
         public SeaSquare(int row, int col)
         {

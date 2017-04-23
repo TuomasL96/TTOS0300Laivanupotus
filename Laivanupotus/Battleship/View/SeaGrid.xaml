@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:Battleship.View"
              xmlns:vm="clr-namespace:Battleship.ViewModel"
-             mc:Ignorable="d" Height="305">
+             mc:Ignorable="d" Height="auto">
     <UserControl.Resources>
         
         <view:ColorConverter x:Key="ColorConverter" />
 
     <Style x:Key="HorizontalListBox">
         <Style.Resources>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"/>
-        </Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
          <Setter Property="ListBox.ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -22,9 +22,8 @@
             </Setter.Value>
         </Setter>
         </Style>
-
     <DataTemplate x:Key="CellTemplate">
-        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="2" Width="20" Height="20" >
+        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="0" Width="20" Height="20" >
                 <Rectangle Fill ="{Binding Type, Converter={StaticResource ColorConverter}}" />
         </Border>            
         </DataTemplate>
@@ -40,13 +39,13 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <StackPanel Width="320" Height="305" Background="White">
-        <ListBox ItemsSource="{Binding MyGrid}" ItemTemplate="{StaticResource RowTemplate}" HorizontalContentAlignment="Center" Padding="0" Background="LightBlue"
+    <StackPanel Width="320" Height="302">
+        <ListBox ItemsSource="{Binding MyGrid}" ItemTemplate="{StaticResource RowTemplate}" HorizontalContentAlignment="Center" Background="LightBlue"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type vm:HumanGridVM}}" Margin="0,0,0,0">
             <ListBox.Style>
                 <Style>
                     <Style.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                     </Style.Resources>
                 </Style>
             </ListBox.Style>

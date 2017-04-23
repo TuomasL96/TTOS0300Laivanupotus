@@ -8,6 +8,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using Battleship.ViewModel;
 using Battleship.Model;
+using Battleship.Properties;
+using System.Media;
 
 namespace Battleship
 {
@@ -36,6 +38,8 @@ namespace Battleship
 
         private void playNewGame(object sender, ExecutedRoutedEventArgs e)
         {
+            SoundPlayer snd = new SoundPlayer(Battleship.Properties.Resources.menu_button);
+            snd.Play();
             humanPlayer.Reset();
             computerPlayer.Reset();            
         }

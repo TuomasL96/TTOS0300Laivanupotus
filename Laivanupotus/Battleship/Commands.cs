@@ -5,11 +5,7 @@ namespace Battleship
 {
     class Commands //näppäinkomentoja peliä varten
     {
-        public static readonly RoutedUICommand NewGame = new RoutedUICommand(
-            "_New Game", "New Game", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.F2) });
-        public static readonly RoutedUICommand Exit = new RoutedUICommand(
-            "E_xit", "Exit", typeof(Commands),
-            new InputGestureCollection { new KeyGesture(Key.F5) });
+        public static readonly RoutedUICommand NewGame = new RoutedUICommand("New Game", "New Game", typeof(Commands),new InputGestureCollection { new KeyGesture(Key.F3) });
+        public static readonly RoutedUICommand Exit = new RoutedUICommand("Exit", "Exit", typeof(Commands),new InputGestureCollection { new KeyGesture(Key.F4) });
     }
 }

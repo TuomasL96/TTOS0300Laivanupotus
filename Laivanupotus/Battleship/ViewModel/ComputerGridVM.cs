@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Battleship.Model;
-using System.Windows.Data;
-using System.ComponentModel;
-using System.Windows.Input;
 using System.Windows;
+using Battleship;
 
 namespace Battleship.ViewModel
 {
@@ -25,16 +21,14 @@ namespace Battleship.ViewModel
             }
         }
 
-
         public override bool Clicked(SeaSquare square, bool automated) // palauttaa true kun peli loppuu
         {
-            if (automated)
+            if (automated) // pelaajalla mahdollisuus antaa tietokoneen ampua
                 humanPlayer.TakeTurnAutomated(computerPlayer);
             else
             {
                 if (square.Type != SquareType.Unknown)
                 {
-                    MessageBox.Show("You have already fired here");
                     return false;
                 }
 
@@ -44,6 +38,7 @@ namespace Battleship.ViewModel
             if (computerPlayer.GameEnd())
             {
                 MessageBox.Show("Congratulations! You sank the entire enemy fleet!");
+                humanPlayer.PlaySound(2);
                 return true;
             }
             else

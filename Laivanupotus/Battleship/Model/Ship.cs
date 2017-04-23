@@ -45,9 +45,7 @@ namespace Battleship.Model
             get
             {
                 if (health == 0)
-                {
                     return true;
-                }
                 else { return false; }
             }
         }

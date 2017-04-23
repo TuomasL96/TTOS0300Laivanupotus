@@ -112,6 +112,21 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\explosion.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lose.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu button.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu button2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -18,7 +18,7 @@ namespace Battleship.View
             switch (type)
             {
                 case SquareType.Unknown:
-                    return new SolidColorBrush(Colors.LightBlue);
+                    return new SolidColorBrush(Colors.AliceBlue);
                 case SquareType.Water:
                     return new SolidColorBrush(Colors.LightBlue);
                 case SquareType.Undamaged:

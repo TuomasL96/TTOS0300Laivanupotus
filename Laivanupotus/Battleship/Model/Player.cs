@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Media;
+using Battleship.Properties;
 
 namespace Battleship.Model
 {
     class Player
     {
-        const int GRID_SIZE = 10;
+        private const int gridSize = 10;
         static Random rnd = new Random();
 
         public List<List<SeaSquare>> MyGrid { get; set; }
@@ -21,12 +24,12 @@ namespace Battleship.Model
             MyGrid = new List<List<SeaSquare>>();
             EnemyGrid = new List<List<SeaSquare>>();
 
-            for (int i = 0; i != GRID_SIZE; ++i)
+            for (int i = 0; i != gridSize; ++i)
             {
                 MyGrid.Add(new List<SeaSquare>());
                 EnemyGrid.Add(new List<SeaSquare>());
 
-                for (int j = 0; j != GRID_SIZE; ++j)
+                for (int j = 0; j != gridSize; ++j)
                 {
                     MyGrid[i].Add(new SeaSquare(i, j));
                     EnemyGrid[i].Add(new SeaSquare(i, j));
@@ -38,15 +41,14 @@ namespace Battleship.Model
                 myShips.Add(new Ship(type));
                 enemyShips.Add(new Ship(type));
             }
-
             Reset();
         }
 
         public void Reset()
         {
-            for (int i = 0; i != GRID_SIZE; ++i)
+            for (int i = 0; i != gridSize; ++i)
             {
-                for (int j = 0; j != GRID_SIZE; ++j)
+                for (int j = 0; j != gridSize; ++j)
                 {
                     MyGrid[i][j].Reset(SquareType.Water);
                     EnemyGrid[i][j].Reset(SquareType.Unknown);
@@ -65,8 +67,8 @@ namespace Battleship.Model
 
         private bool PlaceVertical(int shipIndex, int remainingLength)
         {
-            int startPosRow = rnd.Next(GRID_SIZE - remainingLength);
-            int startPosCol = rnd.Next(GRID_SIZE);
+            int startPosRow = rnd.Next(gridSize - remainingLength);
+            int startPosCol = rnd.Next(gridSize);
 
             Func<bool> PlacementPossible = () =>
             {
@@ -90,14 +92,13 @@ namespace Battleship.Model
                 }
                 return true;
             }
-
             return false;
         }
 
         private bool PlaceHorizontal(int shipIndex, int remainingLength)
         {
-            int startPosRow = rnd.Next(GRID_SIZE);
-            int startPosCol = rnd.Next(GRID_SIZE - remainingLength);
+            int startPosRow = rnd.Next(gridSize);
+            int startPosCol = rnd.Next(gridSize - remainingLength);
 
             Func<bool> PlacementPossible = () =>
             {
@@ -133,9 +134,8 @@ namespace Battleship.Model
             {
                 bool vertical = Convert.ToBoolean(rnd.Next(2));
                 bool placed = false;
-
                 int loopCounter = 0;
-                for (; !placed && loopCounter != 10000; ++loopCounter)
+                for (; !placed && loopCounter != 10000; ++loopCounter) 
                 {
                     int remainingLength = myShips[i].Length;
 
@@ -144,11 +144,9 @@ namespace Battleship.Model
                     else
                         placed = PlaceHorizontal(i, remainingLength);
                 }
-
-                if (loopCounter == 10000)
+                if (loopCounter == 10000) // jos käy huono tuuri ja laivoja ei voi sijoittaa
                     startAgain = true;
             }
-
             if (startAgain)
                 PlaceShips();
         }
@@ -175,46 +173,50 @@ namespace Battleship.Model
             SinkShip(i, EnemyGrid);
         }
 
-
         protected void Fire(int row, int col, Player otherPlayer)
         {
             int damagedIndex;
             bool isSunk;
             SquareType newType = otherPlayer.FiredAt(row, col, out damagedIndex, out isSunk);
             EnemyGrid[row][col].ShipIndex = damagedIndex;
-
             if (isSunk)
+            {
                 EnemySunk(damagedIndex);
+            }
             else
+            {
                 EnemyGrid[row][col].Type = newType;
+            }
         }
 
         public SquareType FiredAt(int row, int col, out int damagedIndex, out bool isSunk)
         {
             isSunk = false;
             damagedIndex = -1;
-
             switch (MyGrid[row][col].Type)
             {
                 case SquareType.Water:
+                    Thread.Sleep(500);
                     return SquareType.Water;
                 case SquareType.Undamaged:
                     var square = MyGrid[row][col];
                     damagedIndex = square.ShipIndex;
                     if (myShips[damagedIndex].FiredAt())
                     {
+                        PlaySound(0);
                         MineSunk(square.ShipIndex);
                         isSunk = true;
-                    } else {
+                        Thread.Sleep(500);
+                    }
+                    else
+                    {
+                        PlaySound(0);
                         square.Type = SquareType.Damaged;
+                        Thread.Sleep(500);
+
                     }
                     return square.Type;
-                case SquareType.Damaged:
-                    goto default;
-                case SquareType.Unknown:
-                    goto default;
-                case SquareType.Sunk:
-                    goto default;
+
                 default:
                     throw new Exception("fail");
             }
@@ -225,20 +227,37 @@ namespace Battleship.Model
             return myShips.All(ship => ship.IsSunk);
         }
 
-        public void TakeTurnAutomated(Player otherPlayer) // tietokoneen ampuminen randomilla
+        public void PlaySound(int soundNumber)
         {
-            bool takenShot = false;
-            while (!takenShot)
+            var sndExplosion = Resources.explosion;
+            var sndLose = Resources.lose;
+            var sndMenu = Resources.menu;
+            switch (soundNumber)
             {
-                int row = rnd.Next(GRID_SIZE);
-                int col = rnd.Next(GRID_SIZE);
-
-                if (EnemyGrid[row][col].Type == SquareType.Unknown)
-                {
-                    Fire(row, col, otherPlayer);
-                    takenShot = true;
-                }
+                case 0:
+                    SoundPlayer snd = new SoundPlayer(sndExplosion);
+                    snd.Play();
+                    break;
+                case 1:
+                    SoundPlayer snd2 = new SoundPlayer(sndLose);
+                    snd2.Play();
+                    break;
+                case 2:
+                    SoundPlayer snd3 = new SoundPlayer(sndMenu);
+                    snd3.Play();
+                    break;
+                default:
+                    break;
             }
+        }
+
+        public void TakeTurnAutomated(Player otherPlayer) // ampuminen randomilla sille "tuntemattomaan" ruutuun
+        {
+            int row = rnd.Next(gridSize);
+            int col = rnd.Next(gridSize);
+            if (EnemyGrid[row][col].Type == SquareType.Unknown)
+                Fire(row, col, otherPlayer);
+            
         }
     }
 }

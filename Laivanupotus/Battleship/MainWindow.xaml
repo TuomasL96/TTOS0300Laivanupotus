@@ -5,18 +5,24 @@
         xmlns:view="clr-namespace:Battleship.View"
         Title="Battleship" SizeToContent="WidthAndHeight">
     <Window.CommandBindings> <!-- näppäinkomennon ei toimi ilman näitä -->
-        <CommandBinding Command="{x:Static local:Commands.NewGame}"
-                    Executed="playNewGame" />
-        <CommandBinding Command="{x:Static local:Commands.Exit}"
-                    Executed="exitGame" />
+        <CommandBinding Command="{x:Static local:Commands.NewGame}" Executed="playNewGame" />
+        <CommandBinding Command="{x:Static local:Commands.Exit}" Executed="exitGame" />
     </Window.CommandBindings>
     <DockPanel>
-        <Menu HorizontalAlignment="Stretch" DockPanel.Dock="Top">
-            <MenuItem Header="Settings" Width="150" HorizontalAlignment="Center">
+        <Menu HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="WhiteSmoke">
+            <MenuItem Header="Settings" Width="auto" HorizontalAlignment="Center">
                 <MenuItem Command="{x:Static local:Commands.NewGame}"/>
                 <MenuItem Command="{x:Static local:Commands.Exit}" />
             </MenuItem>
         </Menu>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="WhiteSmoke">
+            <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 180 0" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <TextBlock Text="Offensive Grid"  Width="auto" Margin="0 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Height="20" Orientation="Horizontal" Background="WhiteSmoke">
+            <TextBlock Text="STATUS:" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 5 0"  FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock x:Name="txt_statusField"  Text="" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+        </StackPanel>
         <DockPanel>
             <view:SeaGrid x:Name="humanGrid" DockPanel.Dock="Left"/>
             <view:SeaGrid x:Name="computerGrid" DockPanel.Dock="Right" />
