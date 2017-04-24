@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Battleship.Model
 {
-    enum ShipType {Carrier, Battleship, Destroyer, Submarine, PatrolBoat};
+    enum ShipType {Carrier, Battleship, Cruiser, Destroyer, Submarine, PatrolBoat};
 
     class Ship
     {
@@ -16,6 +16,7 @@ namespace Battleship.Model
         {
             {ShipType.Carrier, 5},
             {ShipType.Battleship, 4},
+            {ShipType.Cruiser, 4},
             {ShipType.Destroyer, 3},
             {ShipType.Submarine, 3},
             {ShipType.PatrolBoat, 2}

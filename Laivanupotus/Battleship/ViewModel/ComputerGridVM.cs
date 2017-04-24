@@ -39,6 +39,8 @@ namespace Battleship.ViewModel
             {
                 MessageBox.Show("Congratulations! You sank the entire enemy fleet!");
                 humanPlayer.PlaySound(2);
+                humanPlayer.Reset();
+                computerPlayer.Reset();
                 return true;
             }
             else
@@ -48,6 +50,8 @@ namespace Battleship.ViewModel
                 {
                     MessageBox.Show("Your lost the game!");
                     humanPlayer.PlaySound(1);
+                    humanPlayer.Reset();
+                    computerPlayer.Reset();
                     return true;
                 }
             }

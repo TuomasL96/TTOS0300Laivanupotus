@@ -197,7 +197,7 @@ namespace Battleship.Model
             switch (MyGrid[row][col].Type)
             {
                 case SquareType.Water:
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
                     return SquareType.Water;
                 case SquareType.Undamaged:
                     var square = MyGrid[row][col];
@@ -207,13 +207,13 @@ namespace Battleship.Model
                         PlaySound(0);
                         MineSunk(square.ShipIndex);
                         isSunk = true;
-                        Thread.Sleep(500);
+                       // Thread.Sleep(500);
                     }
                     else
                     {
                         PlaySound(0);
                         square.Type = SquareType.Damaged;
-                        Thread.Sleep(500);
+                        //Thread.Sleep(500);
 
                     }
                     return square.Type;
