@@ -181,6 +181,7 @@ namespace Battleship.Model
             EnemyGrid[row][col].ShipIndex = damagedIndex;
             if (isSunk)
             {
+
                 EnemySunk(damagedIndex);
             }
             else
@@ -222,16 +223,17 @@ namespace Battleship.Model
             }
         }
 
-        public bool GameEnd()
+        public bool AllShipsGone()
         {
             return myShips.All(ship => ship.IsSunk);
         }
 
-        public void PlaySound(int soundNumber)
+        public void PlaySound(int soundNumber) // vois tehä oman classin tälle
         {
             var sndExplosion = Resources.explosion;
             var sndLose = Resources.lose;
             var sndMenu = Resources.menu;
+            var sndClick = Resources.menu_button;
             switch (soundNumber)
             {
                 case 0:
@@ -246,6 +248,10 @@ namespace Battleship.Model
                     SoundPlayer snd3 = new SoundPlayer(sndMenu);
                     snd3.Play();
                     break;
+                case 3:
+                    SoundPlayer snd4 = new SoundPlayer(sndClick);
+                    snd4.Play();
+                    break;
                 default:
                     break;
             }
@@ -253,11 +259,18 @@ namespace Battleship.Model
 
         public void TakeTurnAutomated(Player otherPlayer) // ampuminen randomilla sille "tuntemattomaan" ruutuun
         {
-            int row = rnd.Next(gridSize);
-            int col = rnd.Next(gridSize);
-            if (EnemyGrid[row][col].Type == SquareType.Unknown)
-                Fire(row, col, otherPlayer);
-            
+            bool shotTaken = false;
+            while (!shotTaken)
+            {
+                int row = rnd.Next(gridSize);
+                int col = rnd.Next(gridSize);
+
+                if (EnemyGrid[row][col].Type == SquareType.Unknown)
+                {
+                    Fire(row, col, otherPlayer);
+                    shotTaken = true;
+                }
+            }
         }
     }
 }

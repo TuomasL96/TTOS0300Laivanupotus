@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Battleship"
         xmlns:view="clr-namespace:Battleship.View"
-        Title="Battleship" SizeToContent="WidthAndHeight">
+        Title="Battleship" SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize" >
     <Window.CommandBindings> <!-- näppäinkomennon ei toimi ilman näitä -->
         <CommandBinding Command="{x:Static local:Commands.NewGame}" Executed="playNewGame" />
         <CommandBinding Command="{x:Static local:Commands.Exit}" Executed="exitGame" />
@@ -16,7 +17,7 @@
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="WhiteSmoke">
-            <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 180 0" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 240 0" FontWeight="Bold" HorizontalAlignment="Left"/>
             <TextBlock Text="Offensive Grid"  Width="auto" Margin="0 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom" Height="20" Orientation="Horizontal" Background="WhiteSmoke">

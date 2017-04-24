@@ -38,8 +38,7 @@ namespace Battleship
 
         private void playNewGame(object sender, ExecutedRoutedEventArgs e)
         {
-            SoundPlayer snd = new SoundPlayer(Battleship.Properties.Resources.menu_button);
-            snd.Play();
+            humanPlayer.PlaySound(3);
             humanPlayer.Reset();
             computerPlayer.Reset();            
         }

@@ -35,7 +35,7 @@ namespace Battleship.ViewModel
              humanPlayer.TakeTurn(square.Row, square.Col, computerPlayer);
             }
 
-            if (computerPlayer.GameEnd())
+            if (computerPlayer.AllShipsGone())
             {
                 MessageBox.Show("Congratulations! You sank the entire enemy fleet!");
                 humanPlayer.PlaySound(2);
@@ -44,9 +44,10 @@ namespace Battleship.ViewModel
             else
             {
                 computerPlayer.TakeTurn(humanPlayer);
-                if (humanPlayer.GameEnd())
+                if (humanPlayer.AllShipsGone())
                 {
                     MessageBox.Show("Your lost the game!");
+                    humanPlayer.PlaySound(1);
                     return true;
                 }
             }
