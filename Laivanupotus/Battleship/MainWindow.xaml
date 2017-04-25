@@ -11,7 +11,7 @@
     </Window.CommandBindings>
     <DockPanel>
         <Menu HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="WhiteSmoke">
-            <MenuItem Header="Settings" Width="auto" HorizontalAlignment="Center">
+            <MenuItem Header="Menu" Width="auto" HorizontalAlignment="Center">
                 <MenuItem Command="{x:Static local:Commands.NewGame}"/>
                 <MenuItem Command="{x:Static local:Commands.Exit}" />
             </MenuItem>
@@ -19,14 +19,35 @@
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="WhiteSmoke">
             <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 240 0" FontWeight="Bold" HorizontalAlignment="Left"/>
             <TextBlock Text="Offensive Grid"  Width="auto" Margin="0 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <TextBlock Text="Information"  Width="auto" Margin="170 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom" Height="20" Orientation="Horizontal" Background="WhiteSmoke">
-            <TextBlock Text="STATUS:" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 5 0"  FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock x:Name="txt_statusField"  Text="" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+        <StackPanel DockPanel.Dock="Bottom" Height="25" Orientation="Horizontal" Background="WhiteSmoke">
+            <TextBlock Text="Squares:" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"  FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+            <Rectangle Width="15" Height="15" Stroke="Black" Fill="AliceBlue" />
+            <TextBlock Text="= Unknown" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <Rectangle Width="15" Height="15" Stroke="Black" Fill="LightBlue" />
+            <TextBlock Text="= Water" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <Rectangle Width="15" Height="15" Stroke="Black" Fill="Black" />
+            <TextBlock Text="= Ship" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <Rectangle Width="15" Height="15" Stroke="Black" Fill="Orange" />
+            <TextBlock Text="= Ship (Damaged)" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <Rectangle Width="15" Height="15" Stroke="Black" Fill="Red" />
+            <TextBlock Text="= Ship (Sunk)" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
         </StackPanel>
         <DockPanel>
             <view:SeaGrid x:Name="humanGrid" DockPanel.Dock="Left"/>
             <view:SeaGrid x:Name="computerGrid" DockPanel.Dock="Right" />
         </DockPanel>
+        <StackPanel DockPanel.Dock="Right" Width="150" Background="WhiteSmoke">
+            <TextBlock Text="Ship lengths:" FontWeight="Bold" HorizontalAlignment="Left" Margin="10 10 10 0"/>
+            <TextBlock Text="Carrier = 5" HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Battleship = 4" HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Cruiser = 4" HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Destroyer = 3" HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Submarine = 3" HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Patrolboat = 2" HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Guide:" FontWeight="Bold" HorizontalAlignment="Left" Margin="10 10 10 0"/>
+            <TextBlock Text="howtoplay.." HorizontalAlignment="Left" Margin="10 0 10 0"/>
+        </StackPanel>
     </DockPanel>
 </Window>
