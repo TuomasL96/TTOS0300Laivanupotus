@@ -38,7 +38,7 @@ namespace Battleship
 
         private void playNewGame(object sender, ExecutedRoutedEventArgs e)
         {
-            humanPlayer.PlaySound(3);
+            
             humanPlayer.Reset();
             computerPlayer.Reset();            
         }

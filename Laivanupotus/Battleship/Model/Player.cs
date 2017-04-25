@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Media;
 using Battleship.Properties;
+using System.Media;
 
 namespace Battleship.Model
 {
     class Player
     {
         private const int gridSize = 10;
+
         static Random rnd = new Random();
+        MySounds snd = new MySounds();
 
         public List<List<SeaSquare>> MyGrid { get; set; }
         public List<List<SeaSquare>> EnemyGrid { get; set; }
@@ -50,6 +52,7 @@ namespace Battleship.Model
             {
                 for (int j = 0; j != gridSize; ++j)
                 {
+                    snd.PlaySound(4);
                     MyGrid[i][j].Reset(SquareType.Water);
                     EnemyGrid[i][j].Reset(SquareType.Unknown);
                 }
@@ -197,27 +200,23 @@ namespace Battleship.Model
             switch (MyGrid[row][col].Type)
             {
                 case SquareType.Water:
-                    //Thread.Sleep(500);
+                    snd.PlaySound(1);
                     return SquareType.Water;
                 case SquareType.Undamaged:
                     var square = MyGrid[row][col];
                     damagedIndex = square.ShipIndex;
                     if (myShips[damagedIndex].FiredAt())
                     {
-                        PlaySound(0);
                         MineSunk(square.ShipIndex);
+                        snd.PlaySound(0);
                         isSunk = true;
-                       // Thread.Sleep(500);
                     }
                     else
                     {
-                        PlaySound(0);
+                        snd.PlaySound(0);
                         square.Type = SquareType.Damaged;
-                        //Thread.Sleep(500);
-
                     }
                     return square.Type;
-
                 default:
                     throw new Exception("fail");
             }
@@ -228,34 +227,6 @@ namespace Battleship.Model
             return myShips.All(ship => ship.IsSunk);
         }
 
-        public void PlaySound(int soundNumber) // vois tehä oman classin tälle
-        {
-            var sndExplosion = Resources.explosion;
-            var sndLose = Resources.lose;
-            var sndMenu = Resources.menu;
-            var sndClick = Resources.menu_button;
-            switch (soundNumber)
-            {
-                case 0:
-                    SoundPlayer snd = new SoundPlayer(sndExplosion);
-                    snd.Play();
-                    break;
-                case 1:
-                    SoundPlayer snd2 = new SoundPlayer(sndLose);
-                    snd2.Play();
-                    break;
-                case 2:
-                    SoundPlayer snd3 = new SoundPlayer(sndMenu);
-                    snd3.Play();
-                    break;
-                case 3:
-                    SoundPlayer snd4 = new SoundPlayer(sndClick);
-                    snd4.Play();
-                    break;
-                default:
-                    break;
-            }
-        }
 
         public void TakeTurnAutomated(Player otherPlayer) // ampuminen randomilla sille "tuntemattomaan" ruutuun
         {

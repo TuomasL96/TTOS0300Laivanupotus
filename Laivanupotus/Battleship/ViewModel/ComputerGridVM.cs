@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using Battleship.Model;
 using System.Windows;
-using Battleship;
+
 
 namespace Battleship.ViewModel
 {
     class ComputerGridVM : GridVMBase
     {
+        MySounds snd = new MySounds();
         public ComputerGridVM(HumanPlayer humanPlayer, ComputerPlayer computerPlayer)
             : base(humanPlayer, computerPlayer)
         {
@@ -38,7 +39,7 @@ namespace Battleship.ViewModel
             if (computerPlayer.AllShipsGone())
             {
                 MessageBox.Show("Congratulations! You sank the entire enemy fleet!");
-                humanPlayer.PlaySound(2);
+                snd.PlaySound(3);
                 humanPlayer.Reset();
                 computerPlayer.Reset();
                 return true;
@@ -49,13 +50,12 @@ namespace Battleship.ViewModel
                 if (humanPlayer.AllShipsGone())
                 {
                     MessageBox.Show("Your lost the game!");
-                    humanPlayer.PlaySound(1);
+                    snd.PlaySound(2);
                     humanPlayer.Reset();
                     computerPlayer.Reset();
                     return true;
                 }
             }
-
             return false;
         }
     }

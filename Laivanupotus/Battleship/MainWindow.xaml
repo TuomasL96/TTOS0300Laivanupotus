@@ -17,9 +17,9 @@
             </MenuItem>
         </Menu>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="WhiteSmoke">
-            <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 240 0" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 250 0" FontWeight="Bold" HorizontalAlignment="Left"/>
             <TextBlock Text="Offensive Grid"  Width="auto" Margin="0 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
-            <TextBlock Text="Information"  Width="auto" Margin="170 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <TextBlock Text="Information"  Width="auto" Margin="160 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom" Height="25" Orientation="Horizontal" Background="WhiteSmoke">
             <TextBlock Text="Squares:" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"  FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
@@ -39,15 +39,17 @@
             <view:SeaGrid x:Name="computerGrid" DockPanel.Dock="Right" />
         </DockPanel>
         <StackPanel DockPanel.Dock="Right" Width="150" Background="WhiteSmoke">
-            <TextBlock Text="Ship lengths:" FontWeight="Bold" HorizontalAlignment="Left" Margin="10 10 10 0"/>
-            <TextBlock Text="Carrier = 5" HorizontalAlignment="Left" Margin="10 0 10 0"/>
-            <TextBlock Text="Battleship = 4" HorizontalAlignment="Left" Margin="10 0 10 0"/>
-            <TextBlock Text="Cruiser = 4" HorizontalAlignment="Left" Margin="10 0 10 0"/>
-            <TextBlock Text="Destroyer = 3" HorizontalAlignment="Left" Margin="10 0 10 0"/>
-            <TextBlock Text="Submarine = 3" HorizontalAlignment="Left" Margin="10 0 10 0"/>
-            <TextBlock Text="Patrolboat = 2" HorizontalAlignment="Left" Margin="10 0 10 0"/>
-            <TextBlock Text="Guide:" FontWeight="Bold" HorizontalAlignment="Left" Margin="10 10 10 0"/>
-            <TextBlock Text="howtoplay.." HorizontalAlignment="Left" Margin="10 0 10 0"/>
+            <TextBlock Text="Guide:" FontWeight="Bold" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Click on unknown squares in the offensive grid to fire at them. Firing reveals the contents of the square 
+                             and damages an enemy ship if it contains one.  From the defensive grid you can see the position and status of your own ships" 
+                       TextWrapping="Wrap" HorizontalAlignment="Left" Height="auto" Width="auto" Margin="5 5 5 0"/>
+            <TextBlock Text="Ship lengths:" FontWeight="Bold" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Carrier = 5" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Battleship = 4" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Cruiser = 4" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Destroyer = 3" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Submarine = 3" HorizontalAlignment="Left" Margin="5 0 5 0"/>
+            <TextBlock Text="Patrolboat = 2" HorizontalAlignment="Left" Margin="5 0 5 0"/>
         </StackPanel>
     </DockPanel>
 </Window>

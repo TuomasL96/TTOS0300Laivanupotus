@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Battleship.Model
 {
-    enum SquareType { Unknown, Water, Undamaged, Damaged, Sunk,}
+    enum SquareType { Unknown, Water, Undamaged, Damaged, Sunk}
 
     class SeaSquare : DependencyObject
     {
