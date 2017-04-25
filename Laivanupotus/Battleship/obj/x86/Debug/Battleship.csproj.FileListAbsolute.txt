@@ -34,3 +34,7 @@ D:\K2679\laivanupotus2\Laivanupotus\Battleship\obj\x86\Debug\View\SeaGrid.baml
 D:\K2679\laivanupotus2\Laivanupotus\Battleship\obj\x86\Debug\Battleship.g.resources
 D:\K2679\laivanupotus2\Laivanupotus\Battleship\obj\x86\Debug\Battleship.Properties.Resources.resources
 D:\K2679\laivanupotus2\Laivanupotus\Battleship\obj\x86\Debug\Battleship.csproj.GenerateResource.Cache
+D:\K2679\laivanupotus2\Laivanupotus\Battleship\bin\Debug\Battleship.exe.manifest
+D:\K2679\laivanupotus2\Laivanupotus\Battleship\bin\Debug\Battleship.application
+D:\K2679\laivanupotus2\Laivanupotus\Battleship\obj\x86\Debug\Battleship.exe.manifest
+D:\K2679\laivanupotus2\Laivanupotus\Battleship\obj\x86\Debug\Battleship.application
