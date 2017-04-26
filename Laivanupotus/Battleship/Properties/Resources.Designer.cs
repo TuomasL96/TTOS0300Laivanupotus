@@ -91,9 +91,9 @@ namespace Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream menu {
+        internal static System.IO.UnmanagedMemoryStream lose1 {
             get {
-                return ResourceManager.GetStream("menu", resourceCulture);
+                return ResourceManager.GetStream("lose1", resourceCulture);
             }
         }
         
@@ -109,9 +109,36 @@ namespace Battleship.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream menu_button2 {
+        internal static System.IO.UnmanagedMemoryStream miss {
             get {
-                return ResourceManager.GetStream("menu_button2", resourceCulture);
+                return ResourceManager.GetStream("miss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream shipdestroyed {
+            get {
+                return ResourceManager.GetStream("shipdestroyed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream victory {
+            get {
+                return ResourceManager.GetStream("victory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream victory1 {
+            get {
+                return ResourceManager.GetStream("victory1", resourceCulture);
             }
         }
     }

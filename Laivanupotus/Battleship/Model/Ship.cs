@@ -35,10 +35,7 @@ namespace Battleship.Model
 
         public int Length
         {
-            get
-            {
-                return shipLengths[type];
-            }
+            get { return shipLengths[type]; }
         }
         
         public bool IsSunk

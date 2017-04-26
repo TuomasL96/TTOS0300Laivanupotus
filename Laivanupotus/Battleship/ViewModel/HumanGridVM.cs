@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Battleship.ViewModel
 {
-    class HumanGridVM: GridVMBase
+    class HumanGridVM : GridVMBase
     {
         public HumanGridVM(HumanPlayer humanPlayer, ComputerPlayer computerPlayer)
             : base(humanPlayer, computerPlayer)
@@ -19,14 +19,14 @@ namespace Battleship.ViewModel
         public HumanGridVM()
             : base(null, null)
         {
-            humanPlayer = new HumanPlayer();
+            _humanPlayer = new HumanPlayer();
         }
 
         public override List<List<SeaSquare>> MyGrid
         {
             get
             {
-                return humanPlayer.MyGrid;
+                return _humanPlayer.MyGrid;
             }
         }
 

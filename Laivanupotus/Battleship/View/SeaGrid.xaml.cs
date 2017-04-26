@@ -33,7 +33,6 @@ namespace Battleship.View
             SeaSquare content = item.Content as SeaSquare;
 
             if (content == null) { return; }
-
             vm.Clicked(content);            
         }
     }

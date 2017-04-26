@@ -11,13 +11,13 @@ namespace Battleship.ViewModel
 {
     abstract class GridVMBase
     {
-        protected HumanPlayer humanPlayer;
-        protected ComputerPlayer computerPlayer;
+        protected HumanPlayer _humanPlayer;
+        protected ComputerPlayer _computerPlayer;
 
         public GridVMBase(HumanPlayer humanPlayer, ComputerPlayer computerPlayer)
         {
-            this.humanPlayer = humanPlayer;
-            this.computerPlayer = computerPlayer;
+            _humanPlayer = humanPlayer;
+            _computerPlayer = computerPlayer;
         }
 
         public abstract bool Clicked(SeaSquare content, bool automated=false);

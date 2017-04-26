@@ -8,51 +8,46 @@ namespace Battleship.ViewModel
 {
     class ComputerGridVM : GridVMBase
     {
-        MySounds snd = new MySounds();
+
         public ComputerGridVM(HumanPlayer humanPlayer, ComputerPlayer computerPlayer)
             : base(humanPlayer, computerPlayer)
-        {
-        }
+        { }
 
         public override List<List<SeaSquare>> MyGrid
         {
-            get
-            {
-                return humanPlayer.EnemyGrid;
-            }
+            get { return _humanPlayer.EnemyGrid; }
         }
 
         public override bool Clicked(SeaSquare square, bool automated) // palauttaa true kun peli loppuu
         {
-            if (automated) // pelaajalla mahdollisuus antaa tietokoneen ampua
-                humanPlayer.TakeTurnAutomated(computerPlayer);
+            if (automated) // pelaajalla mahdollisuus antaa tietokoneen ampua peli läpi
+            _humanPlayer.TakeTurnAutomated(_computerPlayer);
             else
             {
                 if (square.Type != SquareType.Unknown)
                 {
                     return false;
                 }
-
-             humanPlayer.TakeTurn(square.Row, square.Col, computerPlayer);
+             _humanPlayer.TakeTurn(square.Row, square.Col, _computerPlayer);
             }
 
-            if (computerPlayer.AllShipsGone())
+            if (_computerPlayer.AllShipsGone())
             {
                 MessageBox.Show("Congratulations! You sank the entire enemy fleet!");
-                snd.PlaySound(3);
-                humanPlayer.Reset();
-                computerPlayer.Reset();
+                _humanPlayer.Reset();
+                _computerPlayer.Reset();
+                CustomSoundPlayer.PlayWin();
                 return true;
             }
             else
             {
-                computerPlayer.TakeTurn(humanPlayer);
-                if (humanPlayer.AllShipsGone())
+                _computerPlayer.TakeTurn(_humanPlayer);
+                if (_humanPlayer.AllShipsGone())
                 {
-                    MessageBox.Show("Your lost the game!");
-                    snd.PlaySound(2);
-                    humanPlayer.Reset();
-                    computerPlayer.Reset();
+                    MessageBox.Show("You lost the game!");
+                    _humanPlayer.Reset();
+                    _computerPlayer.Reset();
+                    CustomSoundPlayer.PlayLose();
                     return true;
                 }
             }

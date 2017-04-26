@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Battleship.Properties;
-using System.Media;
+using Battleship.Model;
 
 namespace Battleship.Model
 {
     class Player
     {
         private const int gridSize = 10;
-
-        static Random rnd = new Random();
-        MySounds snd = new MySounds();
-
-        public List<List<SeaSquare>> MyGrid { get; set; }
-        public List<List<SeaSquare>> EnemyGrid { get; set; }
+        private static Random rnd = new Random();
 
         private List<Ship> myShips = new List<Ship>();
         private List<Ship> enemyShips = new List<Ship>();
+
+        public List<List<SeaSquare>> MyGrid { get; set; }
+        public List<List<SeaSquare>> EnemyGrid { get; set; }
 
         public Player()
         {
@@ -52,7 +49,6 @@ namespace Battleship.Model
             {
                 for (int j = 0; j != gridSize; ++j)
                 {
-                    snd.PlaySound(4);
                     MyGrid[i][j].Reset(SquareType.Water);
                     EnemyGrid[i][j].Reset(SquareType.Unknown);
                 }
@@ -184,7 +180,7 @@ namespace Battleship.Model
             EnemyGrid[row][col].ShipIndex = damagedIndex;
             if (isSunk)
             {
-
+                CustomSoundPlayer.PlaySunk();
                 EnemySunk(damagedIndex);
             }
             else
@@ -200,7 +196,7 @@ namespace Battleship.Model
             switch (MyGrid[row][col].Type)
             {
                 case SquareType.Water:
-                    snd.PlaySound(1);
+                    CustomSoundPlayer.PlayMiss();
                     return SquareType.Water;
                 case SquareType.Undamaged:
                     var square = MyGrid[row][col];
@@ -208,12 +204,11 @@ namespace Battleship.Model
                     if (myShips[damagedIndex].FiredAt())
                     {
                         MineSunk(square.ShipIndex);
-                        snd.PlaySound(0);
                         isSunk = true;
                     }
                     else
                     {
-                        snd.PlaySound(0);
+                        CustomSoundPlayer.PlayExplosion();
                         square.Type = SquareType.Damaged;
                     }
                     return square.Type;

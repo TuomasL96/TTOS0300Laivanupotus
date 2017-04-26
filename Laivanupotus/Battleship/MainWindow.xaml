@@ -1,55 +1,53 @@
-﻿<Window x:Class="Battleship.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Battleship"
         xmlns:view="clr-namespace:Battleship.View"
-        Title="Battleship" SizeToContent="WidthAndHeight"
+        xmlns:Model="clr-namespace:Battleship.Model" x:Class="Battleship.MainWindow"
+        Title="Battleships" SizeToContent="WidthAndHeight"
         ResizeMode="NoResize" >
-    <Window.CommandBindings> <!-- näppäinkomennon ei toimi ilman näitä -->
+    <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:Commands.NewGame}" Executed="playNewGame" />
         <CommandBinding Command="{x:Static local:Commands.Exit}" Executed="exitGame" />
+        <CommandBinding Command="{x:Static local:Commands.AutomatedGame}" Executed="autoGame" />
+        <CommandBinding Command="{x:Static local:Commands.ToggleSounds}" Executed="toggleSounds" />
     </Window.CommandBindings>
-    <DockPanel>
-        <Menu HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="WhiteSmoke">
-            <MenuItem Header="Menu" Width="auto" HorizontalAlignment="Center">
-                <MenuItem Command="{x:Static local:Commands.NewGame}"/>
-                <MenuItem Command="{x:Static local:Commands.Exit}" />
-            </MenuItem>
-        </Menu>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="WhiteSmoke">
-            <TextBlock Text="Defensive Grid"  Width="auto" Margin="110 0 250 0" FontWeight="Bold" HorizontalAlignment="Left"/>
-            <TextBlock Text="Offensive Grid"  Width="auto" Margin="0 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
-            <TextBlock Text="Information"  Width="auto" Margin="160 0 0 0" FontWeight="Bold" HorizontalAlignment="Right"/>
+    <DockPanel Background="WhiteSmoke">
+        <StackPanel DockPanel.Dock="Right" Width="250" Background="WhiteSmoke" VerticalAlignment="Stretch" >
+            <TextBlock Text="How to play" TextWrapping="Wrap" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+            <TextBlock TextWrapping="Wrap" FontSize="13" FontWeight="Medium" Margin="0 0 5 5"><Run Text="Both players have one of each ship listed below, the ships will be randomly placed on the grid so that more than one ship can't occupy a single square. Note that ships CAN be placed next to eachother."/><LineBreak/><LineBreak/><Run Text="Click on unknown squares in the offensive grid to fire at them. Firing reveals the contents of the square and damages an enemy ship if it contains one."/><LineBreak/><LineBreak/><Run Text="defensive grid shows you the position and condition of your own ships."/></TextBlock>
+            <TextBlock Text="Ship types and lengths:" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock FontSize="13" FontWeight="Medium" Margin="0 5 0 0" ><Run Text="Carrier = 5"/><LineBreak/><Run Text="Battleship = 4"/><LineBreak/><Run Text="Cruiser = 4"/><LineBreak/><Run Text="Destroyer = 3"/><LineBreak/><Run Text="Submarine = 3"/><LineBreak/><Run Text="Patrolboat = 2"/></TextBlock>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom" Height="25" Orientation="Horizontal" Background="WhiteSmoke">
-            <TextBlock Text="Squares:" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"  FontWeight="Bold" HorizontalAlignment="Left"></TextBlock>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="WhiteSmoke"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="700" Margin="3 3 0 3">
+            <Menu HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="WhiteSmoke">
+                <MenuItem Header="Menu" FontWeight="Bold" FontSize="15" Width="auto" >
+                    <MenuItem Command="{x:Static local:Commands.ToggleSounds}"/>
+                    <MenuItem Command="{x:Static local:Commands.NewGame}"/>
+                    <MenuItem Command="{x:Static local:Commands.AutomatedGame}" />
+                    <MenuItem Command="{x:Static local:Commands.Exit}" />
+                </MenuItem>
+            </Menu>
+            <TextBlock Text="Defensive Grid"  Width="auto" Margin="90 0 280 0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <TextBlock Text="Offensive Grid"  Width="auto" Margin="0 0 0 0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Height="25" Orientation="Horizontal" VerticalAlignment="Center" Background="WhiteSmoke">
+            <TextBlock Text="Squares:" TextAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0" FontSize="15"  FontWeight="Bold" HorizontalAlignment="Left"/>
             <Rectangle Width="15" Height="15" Stroke="Black" Fill="AliceBlue" />
-            <TextBlock Text="= Unknown" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <TextBlock Text="= Unknown" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
             <Rectangle Width="15" Height="15" Stroke="Black" Fill="LightBlue" />
-            <TextBlock Text="= Water" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <TextBlock Text="= Water" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
             <Rectangle Width="15" Height="15" Stroke="Black" Fill="Black" />
-            <TextBlock Text="= Ship" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <TextBlock Text="= Ship" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
             <Rectangle Width="15" Height="15" Stroke="Black" Fill="Orange" />
-            <TextBlock Text="= Ship (Damaged)" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <TextBlock Text="= Ship (Damaged)" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
             <Rectangle Width="15" Height="15" Stroke="Black" Fill="Red" />
-            <TextBlock Text="= Ship (Sunk)" TextAlignment="Center" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <TextBlock Text="= Ship (Sunk)" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
+            <TextBlock Text="Sounds:" Margin="10 0 10 0" VerticalAlignment="Center" FontSize="15"  FontWeight="Bold" HorizontalAlignment="Left"/>
         </StackPanel>
         <DockPanel>
-            <view:SeaGrid x:Name="humanGrid" DockPanel.Dock="Left"/>
-            <view:SeaGrid x:Name="computerGrid" DockPanel.Dock="Right" />
+            <view:SeaGrid x:Name="humanGrid" DockPanel.Dock="Left" Margin="10 0 5 0"/>
+            <view:SeaGrid x:Name="computerGrid" DockPanel.Dock="Right" Margin="5 0 10 0" />
         </DockPanel>
-        <StackPanel DockPanel.Dock="Right" Width="150" Background="WhiteSmoke">
-            <TextBlock Text="Guide:" FontWeight="Bold" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Click on unknown squares in the offensive grid to fire at them. Firing reveals the contents of the square 
-                             and damages an enemy ship if it contains one.  From the defensive grid you can see the position and status of your own ships" 
-                       TextWrapping="Wrap" HorizontalAlignment="Left" Height="auto" Width="auto" Margin="5 5 5 0"/>
-            <TextBlock Text="Ship lengths:" FontWeight="Bold" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Carrier = 5" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Battleship = 4" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Cruiser = 4" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Destroyer = 3" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Submarine = 3" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-            <TextBlock Text="Patrolboat = 2" HorizontalAlignment="Left" Margin="5 0 5 0"/>
-        </StackPanel>
     </DockPanel>
 </Window>
