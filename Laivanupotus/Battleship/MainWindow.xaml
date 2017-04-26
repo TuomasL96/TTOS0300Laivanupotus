@@ -43,7 +43,7 @@
             <TextBlock Text="= Ship (Damaged)" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
             <Rectangle Width="15" Height="15" Stroke="Black" Fill="Red" />
             <TextBlock Text="= Ship (Sunk)" TextAlignment="Center" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" Margin="5 0 10 0"/>
-            <TextBlock Text="Sounds:" Margin="10 0 10 0" VerticalAlignment="Center" FontSize="15"  FontWeight="Bold" HorizontalAlignment="Left"/>
+
         </StackPanel>
         <DockPanel>
             <view:SeaGrid x:Name="humanGrid" DockPanel.Dock="Left" Margin="10 0 5 0"/>
